@@ -15,10 +15,8 @@ export const AppProvider = ({ children }) => {
   const [input, setInput] = useState("");
 
   const fetchBlogs = async () => {
-    // console.log("error2");
     try {
       const { data } = await axios.get("/api/blog/all");
-      // console.log(data);
       data.success ? setBlogs(data.blogs) : toast.error(data.message);
     } catch (error) {
       toast.error(error.message);
@@ -26,12 +24,9 @@ export const AppProvider = ({ children }) => {
   };
 
   useEffect(() => {
-      // console.log("error 1");
       const storedToken = localStorage.getItem("token");
-      // console.log(storedToken);
       if (storedToken) {
           setToken(storedToken);
-          // console.log("setToken");
           axios.defaults.headers.common["Authorization"] = `${storedToken}`;
         }
         fetchBlogs();
