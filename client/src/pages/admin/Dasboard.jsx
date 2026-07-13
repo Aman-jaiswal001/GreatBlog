@@ -21,7 +21,6 @@ const Dasboard = () => {
       const {data} = await axios.get('/api/admin/dashboard');
       data.success ? setDashboardData(data.dashboardData) : toast.error(data.message)
     } catch (error) {
-      console.log("error", error.message)
       toast.error(error.message)
     }
   }

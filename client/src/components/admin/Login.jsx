@@ -11,9 +11,7 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault()
     try {
-      console.log("handle submit")
       const {data} = await axios.post('/api/admin/login', {email,password})
-      console.log("error");
 
       if(data.success){
         setToken(data.token)
@@ -21,7 +19,6 @@ const Login = () => {
         axios.defaults.headers.common['Authorization'] = data.token;
       }
       else{
-        console.log("else error ocur")
         toast.error(data.message)
       }
     } catch (error) {

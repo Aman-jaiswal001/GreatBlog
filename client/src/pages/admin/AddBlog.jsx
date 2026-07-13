@@ -53,10 +53,8 @@ const AddBlog = () => {
       const formData = new FormData();
       formData.append('blog', JSON.stringify(blog))
       formData.append('image', image)
-      console.log('formData')
 
       const {data} = await axios.post('/api/blog/add', formData);
-      console.log(data)
       if(data.success){
         toast.success(data.message)
         setImage(false)
@@ -65,11 +63,9 @@ const AddBlog = () => {
         quillRef.current.root.innerHTML = ''
         setCategory('Startup')
       }else{
-        console.log("47 line")
         toast.error(data.message)
       }
     } catch (error) {
-      console.log("catch error")
       toast.error(error.message)
     }finally{
       setIsAdding(false)

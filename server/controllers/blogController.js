@@ -6,11 +6,8 @@ import main from '../configs/gemini.js';
 
 export const addBlog = async (req, res)=> {
     try {
-        console.log("AddBlog function")
         const {title , subTitle, description,category, isPublished} = JSON.parse(req.body.blog);
-        console.log(req.body.blog)
         const imageFile = req.file;
-        // console.log(imageFile)
 
         //Check if all fields are present
         if(!title || !description || !category || !imageFile){
@@ -18,7 +15,6 @@ export const addBlog = async (req, res)=> {
         }
 
         const fileBuffer = fs.readFileSync(imageFile.path)
-        console.log("filesync")
 
         //upload image to imagekit
         const response = await imageKit.upload({
@@ -26,8 +22,6 @@ export const addBlog = async (req, res)=> {
             fileName : imageFile.originalname,
             folder : '/blogs'
         })
-
-        console.log("response from imageKit")
 
         //optimize the imagekit URL transformation
         const optimizeImageUrl = imageKit.url({
@@ -40,7 +34,6 @@ export const addBlog = async (req, res)=> {
         });
 
         const image = optimizeImageUrl;
-        console.log(optimizeImageUrl)
 
         await Blog.create({title, subTitle, description, category, image, isPublished})
 

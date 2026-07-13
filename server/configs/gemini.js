@@ -11,8 +11,6 @@ async function main(prompt) {
       model: "gemini-3.5-flash",
       contents: prompt,
     });
-
-    // console.log(response.text);
     return response.text;
   } catch (error) {
     console.log(error);
